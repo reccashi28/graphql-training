@@ -6,12 +6,23 @@ const typeDefs  = require('./schema')
 const Query = require('./resolvers/Query')
 const Animal = require('./resolvers/Animals')
 const Category = require('./resolvers/Category')
+const Mutation = require('./resolvers/Mutation')
 
-const server = new ApolloServer({ typeDefs, resolvers: {
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers: {
   Query,
   Animal,
-  Category
-} });
+  Category,
+  Mutation
+  },
+  context: {
+    mainCards,
+    animals,
+    categories
+  }
+});
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
